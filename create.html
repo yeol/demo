@@ -1,0 +1,177 @@
+<html>
+<head>
+	<title>换个人说</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, width=device-width,target-densitydpi=device-dpi"/>
+	<link rel="stylesheet" href="resource/css/base.css">
+	<style type="text/css">
+	body {
+
+		font-family:"Microsoft Yahei","\5fae\8f6f\96c5\9ed1","Helvetica Neue", Helvetica, STHeiTi, sans-serif;font-size: 1.4em;
+	}
+	#pic {
+		position:relative;
+		margin:100px auto 0;
+		width: 80px;
+		height: 80px;
+	}
+	.pic-inner {	
+		width:276px !important;
+		height:368px !important;
+		background:url('http://p0.qhimg.com/t01905341f09d193127.png') no-repeat center;
+		background-size:cover;
+		text-align:center;
+		vertical-align:bottom;
+	}
+	.pic-inner p {
+		position:absolute;
+		top:4em;
+		left:0;
+		width:100%;
+		font-size:12px;
+		color:#999;
+	}
+	#pic img {
+		display:block;
+		position:absolute;
+		top:0;
+		left:0;
+		width:80px;
+		height:80px;
+		z-index:10;
+	}
+	.webuploader-element-invisible {
+		opacity:0;
+	}
+	#name input {
+		display:block;
+		margin:3em auto;
+		background:#fff;
+		font-size:17px;
+		color:#333;
+		padding:6px 10px;
+		border:1px solid #bfbabf;
+		border-radius: 10px;
+	}
+	#ok {
+		background:url(http://p4.qhimg.com/t01ff41a838fc8eaa8f.png) no-repeat;
+		width:331px;
+		height:120px;
+		color:#fff;
+		padding-top:1em;
+		margin:40px auto;
+		line-height:1.4em;
+		font-size:1.4em;
+		text-align:center;
+	}
+	#tips {
+		color:#f00;
+		font-size:12px;
+	}
+	@media screen and (min-width:321px) {
+		#pic {
+			width:276px;
+			height:370px;
+		}
+		.pic-inner {
+			width:15em;
+			height:15em;
+		}
+		.pic-inner p {
+			font-size:2em;
+		}
+		#pic img {
+			width:276px;
+			height:370px;
+		}
+		#name input {
+			height: 2.5em;
+			line-height: 2.5em;
+			font-size:1.4em;
+		}
+
+		#tips {
+			font-size:1.7em;
+		}
+	}
+	</style>
+</head>
+<body>
+	<div id="name">
+		<input name="user" id="user" type="text" placeholder="谁说？请输入他/她的名字吧">
+	</div>
+
+	<div id="pic">
+		<div class="pic-inner">
+		</div>
+	</div>
+
+	<div id="ok">
+		提&nbsp;&nbsp;交
+	</div>
+	<p id="tips"></p>
+<script src="http://s5.qhimg.com/static/30a0e35d13625672/zepto112.js"></script>
+<script src="http://s5.qhimg.com/static/af2ac69e25eea31c.js"></script>
+<script>
+	var userName = null;
+		uploding = false;
+	var uploader = WebUploader.create({
+		server: './create.php',
+		pick: '#pic',
+		fileVal : 'pic',
+		extensions: 'png',
+		mimeTypes: 'image/*',
+		sendAsBinary : true,
+		//auto : true,
+		thumb : {
+			width  : 276,
+			height : 368
+		},
+		compress : {
+			width  : 276,
+			height : 368
+		}
+	});
+	uploader.on('fileQueued', function(file){
+		uploding = true;
+		uploader.makeThumb( file, function( error, ret ) {
+			if ( error ) {
+				//$li.text('预览错误');
+			} else {
+				$('#pic').append($('<img src="' + ret + '" />'));
+			}
+		});
+	});
+	uploader.on( 'uploadSuccess', function( file, ret ) {
+		if(ret._raw !== 'error'){
+			picid = ret._raw;
+			window.location.href = './index.php?name=' + encodeURIComponent(userName) + '&pic=' + encodeURIComponent(picid);
+		} else {
+			$('#tips').text('上传的不是图片！');
+			$('#pic').find('pic').remove();
+			uploding = false;
+		}
+	});
+	uploader.on( 'uploadError', function( file ) {
+		alert('上传失败');
+		$('#pic').find('pic').remove();
+	});
+	uploader.on( 'uploadComplete', function( file ) {
+		uploding = false;
+	});
+
+	$('#ok').on('click', function(e){
+		var name = $('#user').val();
+		if(!name){
+			alert('谁在说？');
+			return;
+		}
+		if(!uploding){
+			alert('请把头像给拖上来！');
+		}
+		userName = name;
+		uploader.upload();
+	});
+</script>
+</body>
+</html>
