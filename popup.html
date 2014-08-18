@@ -11,9 +11,114 @@
 	<meta name="description" content="360安全浏览器(手机/Pad版)官网(IOS/Android)" />
 	<meta name="keywords" content="360Android浏览器,手机浏览器,360浏览器HD,360安卓浏览器,360安全浏览器,安卓浏览器" />
 	<link rel="stylesheet" href="resource/css/base.css">
-	<link rel="stylesheet" href="resource/css/common.css">
+	<style type="text/css">
+		.popup-moudle { 
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+		.popup-moudle .popup-mask {
+			width: 100%;
+			height: 100%;
+			background: #000;
+			opacity: 0.6;
+		}
+		.popup-moudle .popup-main {
+			position: absolute;
+			width: 78%;
+			height: 320px;
+			background-color: #f6f6f6;
+			top: 100px;
+			left: 11%;
+			text-align: center;
+			overflow: hidden;
+		}
+		.popup-main .popup-close {
+			height: 20px;
+			line-height: 20px;
+			width: 20px;
+			color: #fff;
+			background-color: #585e63;
+			float: right;
+		}
+		.popup-main .popup-h1 {
+			margin-top: 20px;
+		}
+		.popup-main .popup-h1 img {
+			width: 168px;
+		}
+		.popup-main .popup-h2 {
+			color: #029131;
+		}
+		.popup-btn {
+			display: block;
+			position: absolute;
+			bottom: 0;
+			background: #509a66;
+			width: 100%;
+			height: 42px;
+			line-height: 42px;
+			overflow: hidden;
+			color: #fff;
+			font-size: 12px;
+		}
+		.popup-btn .btn-icon-l ,
+		.popup-btn .btn-icon-r {
+			background:url(http://p7.qhimg.com/t01913e426c881ec0bd.png) no-repeat;
+			display: block;
+			background-size: 100%;
+			width: 20px;
+			height: 100%;
+		}
+		.popup-btn .btn-icon-l {
+			float: left;
+			background-position: 0 8px;
+			margin-left: 12px;
+		}
+		.popup-btn .btn-icon-r {
+			float: right;
+			background-position: 0 -50px;
+			margin-right: 2px;
+		}
+		.popup-img {
+			overflow: hidden;
+			position: absolute;
+			width: 150px;
+			height: 180px;
+			bottom: 42px;
+			left: 20%;
+		}
+		.popup-img img {
+			width: 154px;
+		}
+		.popup-btn-fix {
+			position: absolute;
+			bottom: 42px;
+			height: 6px;
+			width: 100%;
+			background: url(http://p2.qhimg.com/t017cba2cc198958091.png) center no-repeat;
+			background-size: 100%;
+		}
+	</style>
 </head>
 <body>
-ddd
+	<div class="popup-moudle">
+		<div class="popup-mask"></div>
+		<div class="popup-main">
+			<div class="popup-close">X</div>
+			<p class="popup-h1"><img src="http://p4.qhimg.com/t01990e7f38d6ab7bc4.png"></p>
+			<p class="popup-h2">不惜牺牲美相，只为换一个下载</p>
+			<p class="popup-img"><img src="http://p1.qhimg.com/t01741c9ac87ce43f05.png"></p>
+
+			<p class="popup-btn-fix"></p>
+			<a href="" class="popup-btn">
+				<i class="btn-icon-l"></i>
+				我是美少女璐爷，快来下载我
+				<i class="btn-icon-r"></i>
+			</a>
+		</div>
+	</div>
 </body>
 </html>
